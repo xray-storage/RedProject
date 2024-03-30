@@ -56,7 +56,7 @@ void CUIOptionsItem::SaveOptIntegerValue(int val, bool IsUe)
 {
 	if (IsUe)
 	{
-		g_Engine->ChangeUeSettings(UeSettingIndex, val);
+		UeSettingsMap[UeSettingIndex] = val;
 	}
 	else
 	{
@@ -116,6 +116,9 @@ void CUIOptionsItem::SaveValue(){
 			m_entry == "rs_no_v_sync"	||
 			m_entry == "texture_lod")
 	m_optionsManager.DoVidRestart();
+
+	for (const auto i : UeSettingsMap)
+		g_Engine->ChangeUeSettings(i.first, i.second);
 
 	if (/*m_entry == "snd_freq" ||*/ m_entry == "snd_efx")
 		m_optionsManager.DoSndRestart();

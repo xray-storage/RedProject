@@ -39,6 +39,7 @@ protected:
 
 	xr_string		m_entry;
 	int UeSettingIndex;
+	std::map<int, int> UeSettingsMap;
 
 	static CUIOptionsManager m_optionsManager;
 };
