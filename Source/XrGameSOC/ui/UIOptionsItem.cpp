@@ -10,10 +10,11 @@ CUIOptionsItem::~CUIOptionsItem()
 	m_optionsManager.UnRegisterItem(this);
 }
 
-void CUIOptionsItem::Register(const char* entry, const char* group)
+void CUIOptionsItem::Register(const char* entry, const char* group, int UeSettingIndex)
 {
 	m_optionsManager.RegisterItem	(this, group);
 	m_entry							= entry;	
+	UeSettingValue = UeSettingIndex;
 }
 
 void CUIOptionsItem::SendMessage2Group(const char* group, const char* message)
@@ -39,16 +40,26 @@ void CUIOptionsItem::SaveOptStringValue(const char* val)
 	Console->Execute	(command.c_str());
 }
 
-void CUIOptionsItem::GetOptIntegerValue(int& val, int& min, int& max)
+void CUIOptionsItem::GetOptIntegerValue(int& val, int& min, int& max, bool IsUe)
 {
-	val = Console->GetInteger(m_entry.c_str(),  min, max);
+	if (IsUe)
+	{
+		val = g_Engine->GetSetting(UeSettingIndex);
+	}
+	else
+		val = Console->GetInteger(m_entry.c_str(),  min, max);
 }
 
-void CUIOptionsItem::SaveOptIntegerValue(int val)
+void CUIOptionsItem::SaveOptIntegerValue(int val, bool IsUe)
 {
-	string512			command;
-	sprintf_s				(command, "%s %d", m_entry.c_str(), val);
-	Console->Execute	(command);
+	if(IsUe)
+		g_Engine->ChangeUeSettings(UeSettingIndex, val);
+	else
+	{
+		string512			command;
+		sprintf_s(command, "%s %d", m_entry.c_str(), val);
+		Console->Execute(command);
+	}
 }
 
 void CUIOptionsItem::GetOptFloatValue(float& val, float& min, float& max)

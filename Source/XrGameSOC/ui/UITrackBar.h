@@ -28,6 +28,7 @@ public:
 			bool	GetInvert				() const	{return m_b_invert;};
 			void	SetStep					(float step);
 			void	SetType					(bool b_float){m_b_is_float=b_float;};
+			void	SetUeType(bool type) { m_b_is_ue = type; };
 			bool	GetCheck				();
 			void	SetCheck				(bool b);
 protected:
@@ -39,6 +40,7 @@ protected:
 	CUIFrameLineWnd*	m_pFrameLine_d;
 	bool				m_b_invert;
 	bool				m_b_is_float;
+	bool				m_b_is_ue;
 
 	union{
 		struct{

@@ -19,7 +19,8 @@ CUITrackBar::CUITrackBar()
 	  m_f_back_up(0),
 	 m_f_step(0.01f),
 	m_b_is_float(true),
-	m_b_invert(false)
+	m_b_invert(false),
+	m_b_is_ue(false)
 {	
 	m_pFrameLine					= xr_new<CUIFrameLineWnd>();	
 	AttachChild						(m_pFrameLine);	
@@ -71,7 +72,7 @@ void CUITrackBar::SetCurrentValue()
 	if(m_b_is_float)
 		GetOptFloatValue	(m_f_val, m_f_min, m_f_max);
 	else
-		GetOptIntegerValue		(m_i_val, m_i_min, m_i_max);
+		GetOptIntegerValue		(m_i_val, m_i_min, m_i_max, m_b_is_ue);
 
 	UpdatePos			();
 }
@@ -88,7 +89,7 @@ void CUITrackBar::SaveValue()
 	if(m_b_is_float)
 		SaveOptFloatValue			(m_f_val);
 	else
-		SaveOptIntegerValue			(m_i_val);
+		SaveOptIntegerValue			(m_i_val, m_b_is_ue);
 }
 
 bool CUITrackBar::IsChanged()

@@ -79,7 +79,7 @@ extern	BOOL	g_show_wnd_rect			;
 extern	BOOL	g_show_wnd_rect2			;
 //-----------------------------------------------------------
 extern	float	g_fTimeFactor;
-
+extern int shadow_resol = 3;
 
 void register_mp_console_commands();
 //-----------------------------------------------------------
@@ -1295,6 +1295,7 @@ void CCC_RegisterCommands()
 	CMD1(CCC_GameDifficulty,	"g_game_difficulty"		);
 
 	CMD3(CCC_Mask,				"g_backrun",			&psActorFlags,	AF_RUN_BACKWARD);
+	CMD4(CCC_Integer, "sg.ShadowQuality", &shadow_resol, 0, 3);
 
 	// alife
 #ifdef DEBUG

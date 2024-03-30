@@ -6,7 +6,7 @@ class CUIOptionsItem
 	friend class CUIOptionsManager;
 public:
 	virtual					~CUIOptionsItem		();
-	virtual void			Register			(const char* entry, const char* group);
+	virtual void			Register			(const char* entry, const char* group, int UeSettingIndex);
 	static CUIOptionsManager* GetOptionsManager	() {return &m_optionsManager;}
 protected:
 	virtual void			SetCurrentValue		()	=0;	
@@ -24,8 +24,8 @@ protected:
 			LPCSTR			GetOptStringValue	();
 			void			SaveOptStringValue	(const char* val);
 			// integer
-			void			GetOptIntegerValue	(int& val, int& min, int& max);
-			void			SaveOptIntegerValue	(int val);
+			void			GetOptIntegerValue	(int& val, int& min, int& max, bool IsUe = false);
+			void			SaveOptIntegerValue	(int val, bool IsUe = false);
 			// float
 			void			GetOptFloatValue	(float& val, float& min, float& max);
 			void			SaveOptFloatValue	(float val);
@@ -38,6 +38,7 @@ protected:
 			void			SaveOptTokenValue	(const char* val);
 
 	xr_string		m_entry;
+	int UeSettingIndex;
 
 	static CUIOptionsManager m_optionsManager;
 };

@@ -44,6 +44,9 @@ public:
 	virtual IRBMKLoadingScreenManager*		GetLoadingScreen			() = 0;
 	virtual IRBMKSoundManager*				GetSoundManager				() = 0;
 	virtual IRBMKEnvironment*				GetEnvironment				() = 0;
+	virtual int								GetSetting(int setting) = 0;
+	virtual void							ExecUeCmd					(const char* cmd) = 0;
+	virtual void							ChangeUeSettings(int setting, int value) = 0;
 			IRBMKEnvironment*				GetEnvironmentCheck			() {IRBMKEnvironment* Environment = GetEnvironment();R_ASSERT(Environment); return Environment;};
 
 private:
