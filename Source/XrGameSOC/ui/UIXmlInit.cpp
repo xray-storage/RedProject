@@ -224,14 +224,14 @@ bool CUIXmlInit::InitStatic(CUIXml& xml_doc, LPCSTR path,
 
 bool CUIXmlInit::InitCheck(CUIXml& xml_doc, LPCSTR path, int index, CUICheckButton* pWnd){
 	InitStatic(xml_doc, path, index, pWnd);
-	InitOptionsItem(xml_doc, path, index, pWnd, 0);
+	InitOptionsItem(xml_doc, path, index, pWnd);
 
 	return true;
 }
 
 bool CUIXmlInit::InitSpin(CUIXml& xml_doc, const char* path, int index, CUICustomSpin* pWnd){
 	InitWindow(xml_doc, path, index, pWnd);
-	InitOptionsItem(xml_doc, path, index, pWnd, 0);
+	InitOptionsItem(xml_doc, path, index, pWnd);
 
 	string256				foo;
 	u32						color;
@@ -715,7 +715,7 @@ bool CUIXmlInit::InitTabControl(CUIXml &xml_doc, LPCSTR path, int index, CUITabC
 	bool status				= true;
 
 	status &= InitWindow	(xml_doc, path, index, pWnd);
-	InitOptionsItem			(xml_doc, path, index, pWnd, 0);
+	InitOptionsItem			(xml_doc, path, index, pWnd);
 	int tabsCount			= xml_doc.GetNodesNum(path, index, "button");
 	int radio				= xml_doc.ReadAttribInt(path, index, "radio");
 
@@ -853,7 +853,7 @@ bool CUIXmlInit::InitEditBoxEx(CUIXml& xml_doc, const char* path, int index, CUI
 bool CUIXmlInit::InitEditBox(CUIXml& xml_doc, const char* path, int index, CUIEditBox* pWnd){
 	InitCustomEdit(xml_doc, path, index, pWnd);
 	InitTexture(xml_doc, path, index, pWnd);
-	InitOptionsItem(xml_doc, path, index, pWnd, 0);
+	InitOptionsItem(xml_doc, path, index, pWnd);
 
 	return true;
 }
@@ -1313,7 +1313,7 @@ bool CUIXmlInit::InitComboBox(CUIXml& xml_doc, const char* path, int index, CUIC
 	pWnd->SetListLength			(xml_doc.ReadAttribInt(path, index, "list_length", 4));
 
 	InitWindow					(xml_doc, path, index, pWnd);
-	InitOptionsItem				(xml_doc, path, index, pWnd, 0);
+	InitOptionsItem				(xml_doc, path, index, pWnd);
 
 	bool b = (1==xml_doc.ReadAttribInt(path, index, "always_show_scroll",1));
 
