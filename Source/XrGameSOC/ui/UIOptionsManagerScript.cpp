@@ -12,8 +12,8 @@ void CUIOptionsManagerScript::SaveBackupValues(const char* group){
 	CUIOptionsItem::GetOptionsManager()->SeveBackupValues(group);
 }
 
-void CUIOptionsManagerScript::SaveValues(const char* group){
-	CUIOptionsItem::GetOptionsManager()->SaveValues(group);
+void CUIOptionsManagerScript::SaveValues(const char* group, bool need_post_save){
+	CUIOptionsItem::GetOptionsManager()->SaveValues(group, need_post_save);
 }
 
 bool CUIOptionsManagerScript::IsGroupChanged(const char* group){

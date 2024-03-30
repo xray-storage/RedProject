@@ -106,6 +106,12 @@ void CUIOptionsItem::SaveOptTokenValue(const char* val){
 	SaveOptStringValue(val);
 }
 
+void CUIOptionsItem::SaveUeValue()
+{
+	for (const auto i : UeSettingsMap)
+		g_Engine->ChangeUeSettings(i.first, i.second);
+}
+
 void CUIOptionsItem::SaveValue(){
 	if (	m_entry == "vid_mode"		|| 
 			m_entry == "_preset"		|| 
@@ -116,9 +122,6 @@ void CUIOptionsItem::SaveValue(){
 			m_entry == "rs_no_v_sync"	||
 			m_entry == "texture_lod")
 	m_optionsManager.DoVidRestart();
-
-	for (const auto i : UeSettingsMap)
-		g_Engine->ChangeUeSettings(i.first, i.second);
 
 	if (/*m_entry == "snd_freq" ||*/ m_entry == "snd_efx")
 		m_optionsManager.DoSndRestart();

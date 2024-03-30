@@ -6,7 +6,7 @@ class CUIOptionsManagerScript {
 public:
 	void SaveBackupValues(const char* group);
 	void SetCurrentValues(const char* group);
-	void SaveValues(const char* group);
+	void SaveValues(const char* group, bool need_post_save = false);
 	bool IsGroupChanged(const char* group);
 	void UndoGroup(const char* group);
 	void OptionsPostAccept();

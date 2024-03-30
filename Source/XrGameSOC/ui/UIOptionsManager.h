@@ -13,7 +13,7 @@ public:
 
 	void SeveBackupValues(const char* group);
 	void SetCurrentValues(const char* group);
-	void SaveValues(const char* group);
+	void SaveValues(const char* group, bool need_post_save);
 	bool IsGroupChanged(const char* group);
 	void UndoGroup(const char* group);
 

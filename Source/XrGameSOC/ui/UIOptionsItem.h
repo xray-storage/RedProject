@@ -8,6 +8,7 @@ public:
 	virtual					~CUIOptionsItem		();
 	virtual void			Register			(const char* entry, const char* group, int UeSetting);
 	static CUIOptionsManager* GetOptionsManager	() {return &m_optionsManager;}
+	void					SaveUeValue();
 protected:
 	virtual void			SetCurrentValue		()	=0;	
 	virtual void			SaveValue			();
