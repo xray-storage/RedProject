@@ -10,11 +10,11 @@ CUIOptionsItem::~CUIOptionsItem()
 	m_optionsManager.UnRegisterItem(this);
 }
 
-void CUIOptionsItem::Register(const char* entry, const char* group, int UeSettingIndex)
+void CUIOptionsItem::Register(const char* entry, const char* group, int UeSetting)
 {
 	m_optionsManager.RegisterItem	(this, group);
 	m_entry							= entry;	
-	UeSettingValue = UeSettingIndex;
+	UeSettingIndex = UeSetting;
 }
 
 void CUIOptionsItem::SendMessage2Group(const char* group, const char* message)

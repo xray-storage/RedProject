@@ -6,7 +6,7 @@ class CUIOptionsItem
 	friend class CUIOptionsManager;
 public:
 	virtual					~CUIOptionsItem		();
-	virtual void			Register			(const char* entry, const char* group, int UeSettingIndex);
+	virtual void			Register			(const char* entry, const char* group, int UeSetting);
 	static CUIOptionsManager* GetOptionsManager	() {return &m_optionsManager;}
 protected:
 	virtual void			SetCurrentValue		()	=0;	
