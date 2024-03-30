@@ -54,7 +54,6 @@ void CUIOptionsItem::SaveOptIntegerValue(int val, bool IsUe)
 {
 	if (IsUe)
 	{
-		Msg("%s Set UE Setting: index: %d, val: %d", UeSettingIndex, val);
 		g_Engine->ChangeUeSettings(UeSettingIndex, val);
 	}
 	else
