@@ -44,6 +44,8 @@ void CUIOptionsItem::GetOptIntegerValue(int& val, int& min, int& max, bool IsUe)
 {
 	if (IsUe)
 	{
+		min = 0;
+		max = 4;
 		val = g_Engine->GetSetting(UeSettingIndex);
 	}
 	else
