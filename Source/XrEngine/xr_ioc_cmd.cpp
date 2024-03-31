@@ -359,70 +359,6 @@ public:
 	}
 };
 
-class CCC_VidMode : public CCC_Token
-{
-	u32		_dummy;
-public:
-	CCC_VidMode(LPCSTR N) : CCC_Token(N, &_dummy, NULL) { bEmptyArgsHandled = FALSE; };
-	virtual void	Execute(LPCSTR args) {
-		u32 _w, _h;
-		int cnt = sscanf(args, "%dx%d", &_w, &_h);
-		if (cnt == 2) {
-			g_Engine->SetResolution(_w, _h);
-		}
-		else {
-			Msg("! Wrong video mode [%s]", args);
-			return;
-		}
-	}
-	virtual void	Status(TStatus& S)
-	{
-		u32 width, height;
-		g_Engine->GetCurrentResolution(width, height);
-		xr_sprintf(S, sizeof(S), "%dx%d", width, height);
-	}
-
-	virtual void	Info(TInfo& I)
-	{
-		xr_strcpy(I, sizeof(I), "change screen resolution WxH");
-	}
-	virtual xr_token* GetToken()
-	{
-		xr_token* tok;
-		std::map<u32, u32> ResList;
-		g_Engine->GetResolutions(ResList);
-		int i = 0;
-		tok[ResList.size()];
-		for (auto res : ResList)
-		{
-			i++;
-			string128 str;
-			xr_sprintf(str, sizeof(str), "%dx%d", res.first, res.second);
-			tok[i].id = i;
-			tok[i].name = str;
-
-		}
-
-		return tok;
-	}
-	virtual void	fill_tips(vecTips& tips, u32 mode)
-	{
-		std::map<u32, u32> ResolutionList;
-		g_Engine->GetResolutions(ResolutionList);
-		for (const auto& res : ResolutionList)
-		{
-			string128 tmp;
-			xr_sprintf(tmp, sizeof(tmp), "%dx%d", res.first, res.second);
-
-			tips.push_back(tmp);
-		}
-		TStatus S;
-		Status(S);
-		tips.push_back(S);
-	}
-
-};
-
 class CCC_Disconnect : public IConsole_Command
 {
 public:
@@ -539,7 +475,6 @@ void CCC_Register()
 	CMD1(CCC_Disconnect,"disconnect"			);
 	CMD1(CCC_SaveCFG,	"cfg_save"				);
 	CMD1(CCC_LoadCFG,	"cfg_load"				);
-	CMD1(CCC_VidMode, "vid_mode");
 
 #ifdef DEBUG
 	CMD1(CCC_MotionsStat,	"stat_motions"		);
