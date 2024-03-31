@@ -70,7 +70,7 @@ void CUITrackBar::Init(float x, float y, float width, float height){
 void CUITrackBar::SetCurrentValue()
 {
 	if(m_b_is_float)
-		GetOptFloatValue	(m_f_val, m_f_min, m_f_max);
+		GetOptFloatValue	(m_f_val, m_f_min, m_f_max, m_b_is_ue);
 	else
 		GetOptIntegerValue		(m_i_val, m_i_min, m_i_max, m_b_is_ue);
 
@@ -87,7 +87,7 @@ void CUITrackBar::SaveValue()
 {
 	CUIOptionsItem::SaveValue	();
 	if(m_b_is_float)
-		SaveOptFloatValue			(m_f_val);
+		SaveOptFloatValue			(m_f_val, m_b_is_ue);
 	else
 		SaveOptIntegerValue			(m_i_val, m_b_is_ue);
 }

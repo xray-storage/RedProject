@@ -28,8 +28,8 @@ protected:
 			void			GetOptIntegerValue	(int& val, int& min, int& max, bool IsUe = false);
 			void			SaveOptIntegerValue	(int val, bool IsUe = false);
 			// float
-			void			GetOptFloatValue	(float& val, float& min, float& max);
-			void			SaveOptFloatValue	(float val);
+			void			GetOptFloatValue	(float& val, float& min, float& max, bool IsUe = false);
+			void			SaveOptFloatValue	(float val, bool IsUe = false);
 			// bool
 			bool			GetOptBoolValue		();
 			void			SaveOptBoolValue	(bool val);
@@ -40,7 +40,8 @@ protected:
 
 	xr_string		m_entry;
 	int UeSettingIndex;
-	std::map<int, int> UeSettingsMap;
+	std::map<int, int> UeSettingsMapInt;
+	std::map<int, float> UeSettingsMapFloat;
 
 	static CUIOptionsManager m_optionsManager;
 };

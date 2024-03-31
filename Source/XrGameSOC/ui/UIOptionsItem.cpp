@@ -7,7 +7,8 @@ CUIOptionsManager CUIOptionsItem::m_optionsManager;
 
 CUIOptionsItem::~CUIOptionsItem()
 {
-	UeSettingsMap.clear();
+	UeSettingsMapInt.clear();
+	UeSettingsMapFloat.clear();
 	m_optionsManager.UnRegisterItem(this);
 }
 
@@ -45,7 +46,7 @@ void CUIOptionsItem::GetOptIntegerValue(int& val, int& min, int& max, bool IsUe)
 {
 	if (IsUe)
 	{
-		val = g_Engine->GetSetting(UeSettingIndex, min, max);
+		val = g_Engine->GetSettingInt(UeSettingIndex, min, max);
 	}
 	else
 		val = Console->GetInteger(m_entry.c_str(),  min, max);
@@ -55,7 +56,7 @@ void CUIOptionsItem::SaveOptIntegerValue(int val, bool IsUe)
 {
 	if (IsUe)
 	{
-		UeSettingsMap[UeSettingIndex] = val;
+		UeSettingsMapInt[UeSettingIndex] = val;
 	}
 	else
 	{
@@ -65,16 +66,28 @@ void CUIOptionsItem::SaveOptIntegerValue(int val, bool IsUe)
 	}
 }
 
-void CUIOptionsItem::GetOptFloatValue(float& val, float& min, float& max)
+void CUIOptionsItem::GetOptFloatValue(float& val, float& min, float& max, bool IsUe)
 {
-	val = Console->GetFloat(m_entry.c_str(), min, max);
+	if (IsUe)
+	{
+		val = g_Engine->GetSettingFloat(UeSettingIndex, min, max);
+	}
+	else
+		val = Console->GetFloat(m_entry.c_str(), min, max);
 }
 
-void CUIOptionsItem::SaveOptFloatValue(float val)
+void CUIOptionsItem::SaveOptFloatValue(float val, bool IsUe)
 {
-	string512			command;
-	sprintf_s				(command, "%s %f", m_entry.c_str(), val);
-	Console->Execute	(command);
+	if (IsUe)
+	{
+		UeSettingsMapFloat[UeSettingIndex] = val;
+	}
+	else
+	{
+		string512			command;
+		sprintf_s(command, "%s %f", m_entry.c_str(), val);
+		Console->Execute(command);
+	}
 }
 
 bool CUIOptionsItem::GetOptBoolValue()
@@ -107,20 +120,11 @@ void CUIOptionsItem::SaveOptTokenValue(const char* val){
 
 void CUIOptionsItem::SaveUeValue()
 {
-		g_Engine->ChangeUeSettings(UeSettingsMap);
+		g_Engine->ChangeUeSettingsInt(UeSettingsMapInt);
+		g_Engine->ChangeUeSettingsFloat(UeSettingsMapFloat);
 }
 
-void CUIOptionsItem::SaveValue(){
-	if (	m_entry == "vid_mode"		|| 
-			m_entry == "_preset"		|| 
-			m_entry == "rs_fullscreen" 	||	
-			m_entry == "rs_fullscreen"	||
-			m_entry == "r__supersample"	|| 
-			m_entry == "rs_refresh_60hz"||
-			m_entry == "rs_no_v_sync"	||
-			m_entry == "texture_lod")
-	m_optionsManager.DoVidRestart();
+void CUIOptionsItem::SaveValue()
+{
 
-	if (/*m_entry == "snd_freq" ||*/ m_entry == "snd_efx")
-		m_optionsManager.DoSndRestart();
 }
