@@ -386,7 +386,23 @@ public:
 	{
 		xr_strcpy(I, sizeof(I), "change screen resolution WxH");
 	}
+	virtual xr_token* GetToken()
+	{
+		xr_token* tok;
+		std::map<u32, u32> ResList;
+		g_Engine->GetAvaliableResolution(ResList);
+		int i = 0;
+		tok[ResList.size()];
+		for (auto res : ResList)
+		{
+			i++;
+			string128 str;
+			xr_sprintf(str, sizeof(str), "%dx%d", res.first, res.second);
+			tok[i].id = i;
+			tok[i].name = str;
 
+		}
+	}
 	virtual void	fill_tips(vecTips& tips, u32 mode)
 	{
 		std::map<u32, u32> ResolutionList;
