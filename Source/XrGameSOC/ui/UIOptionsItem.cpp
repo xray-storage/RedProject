@@ -7,6 +7,7 @@ CUIOptionsManager CUIOptionsItem::m_optionsManager;
 
 CUIOptionsItem::~CUIOptionsItem()
 {
+	UeSettingsMap.clear();
 	m_optionsManager.UnRegisterItem(this);
 }
 
@@ -44,9 +45,7 @@ void CUIOptionsItem::GetOptIntegerValue(int& val, int& min, int& max, bool IsUe)
 {
 	if (IsUe)
 	{
-		min = 0;
-		max = 4;
-		val = g_Engine->GetSetting(UeSettingIndex);
+		val = g_Engine->GetSetting(UeSettingIndex, min, max);
 	}
 	else
 		val = Console->GetInteger(m_entry.c_str(),  min, max);
@@ -108,8 +107,7 @@ void CUIOptionsItem::SaveOptTokenValue(const char* val){
 
 void CUIOptionsItem::SaveUeValue()
 {
-	for (const auto i : UeSettingsMap)
-		g_Engine->ChangeUeSettings(i.first, i.second);
+		g_Engine->ChangeUeSettings(UeSettingsMap);
 }
 
 void CUIOptionsItem::SaveValue(){
