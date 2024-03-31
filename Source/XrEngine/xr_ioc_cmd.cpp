@@ -390,7 +390,7 @@ public:
 	{
 		xr_token* tok;
 		std::map<u32, u32> ResList;
-		g_Engine->GetAvaliableResolution(ResList);
+		g_Engine->GetResolutions(ResList);
 		int i = 0;
 		tok[ResList.size()];
 		for (auto res : ResList)
@@ -402,11 +402,13 @@ public:
 			tok[i].name = str;
 
 		}
+
+		return tok;
 	}
 	virtual void	fill_tips(vecTips& tips, u32 mode)
 	{
 		std::map<u32, u32> ResolutionList;
-		g_Engine->GetAvaliableResolution(ResolutionList);
+		g_Engine->GetResolutions(ResolutionList);
 		for (const auto& res : ResolutionList)
 		{
 			string128 tmp;
