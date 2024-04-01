@@ -7,6 +7,8 @@ public:
 	void SaveBackupValues(const char* group);
 	void SetCurrentValues(const char* group);
 	void SaveValues(const char* group, bool need_post_save = false);
+	LPCSTR GetCurrentResolution();
+	LPCSTR   SetResolution(bool next);
 	bool IsGroupChanged(const char* group);
 	void UndoGroup(const char* group);
 	void OptionsPostAccept();
